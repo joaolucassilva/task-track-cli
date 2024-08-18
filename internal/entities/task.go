@@ -21,12 +21,12 @@ type Task struct {
 	UpdatedAt   string `json:"updated_at"`
 }
 
-func NewTask(id int64, description string, status Status) *Task {
+func NewTask(id int64, description string) *Task {
 	currentTime := time.Now().Format(time.RFC3339)
 	return &Task{
 		ID:          id,
 		Description: description,
-		Status:      status,
+		Status:      StatusTodo,
 		CreatedAt:   currentTime,
 		UpdatedAt:   currentTime,
 	}
@@ -38,6 +38,12 @@ func (t *Task) UpdateDescription(description string) error {
 	}
 
 	t.Description = description
+	t.UpdatedAt = time.Now().Format(time.RFC3339)
+	return nil
+}
+
+func (t *Task) UpdateStatus(status Status) error {
+	t.Status = status
 	t.UpdatedAt = time.Now().Format(time.RFC3339)
 	return nil
 }
