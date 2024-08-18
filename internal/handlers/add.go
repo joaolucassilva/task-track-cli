@@ -16,7 +16,6 @@ func Add(name string) {
 	newTask := entities.NewTask(
 		getNextId(tasks),
 		name,
-		entities.StatusDone,
 	)
 
 	tasks = append(tasks, *newTask)

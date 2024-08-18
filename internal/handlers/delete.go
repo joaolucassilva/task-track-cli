@@ -5,11 +5,11 @@ import (
 	"strconv"
 )
 
-func Delete(ID string) {
+func DeleteById(ID string) {
 	tasks := GetTasksFromFile()
 	var idInt, _ = strconv.ParseInt(ID, 10, 64)
 
-	indexSearch := 0
+	indexSearch := -1
 	for i, task := range tasks {
 		if task.ID == idInt {
 			indexSearch = i
@@ -17,7 +17,7 @@ func Delete(ID string) {
 		}
 	}
 
-	if indexSearch == 0 {
+	if indexSearch == -1 {
 		fmt.Printf("No task found with ID %s\n", ID)
 		return
 	}
