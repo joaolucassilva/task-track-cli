@@ -45,7 +45,7 @@ func UpdateStatus(ID string, status entities.Status) {
 	var idInt, _ = strconv.ParseInt(ID, 10, 64)
 	updated := false
 	for i, task := range tasks {
-		if task.ID == idInt {
+		if task.ID == idInt && task.Status != status {
 			err := task.UpdateStatus(status)
 			if err != nil {
 				fmt.Printf(err.Error())
@@ -59,6 +59,7 @@ func UpdateStatus(ID string, status entities.Status) {
 
 	if updated {
 		database.WriteTaskToFile(tasks)
+		fmt.Printf("Task with ID %s updated to %s", ID, status)
 		return
 	}
 
