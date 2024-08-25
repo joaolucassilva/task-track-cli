@@ -27,16 +27,11 @@ func Add(name string) {
 }
 
 func getNextId(tasks []entities.Task) int64 {
-	if len(tasks) == 0 {
+	taskLength := len(tasks)
+
+	if taskLength == 0 {
 		return 1
 	}
 
-	maxId := tasks[0].ID
-	for _, task := range tasks {
-		if task.ID > maxId {
-			maxId = task.ID
-		}
-	}
-
-	return maxId + 1
+	return int64(taskLength + 1)
 }
