@@ -3,10 +3,16 @@ package handlers
 import (
 	"fmt"
 	"github.com/joaolucassilva/task-track-cli/internal/entities"
+	"github.com/joaolucassilva/task-track-cli/internal/infra/database"
 )
 
 func ListAll(filterStatus string) {
-	tasks := GetTasksFromFile()
+	if filterStatus != "" && filterStatus != "done" && filterStatus != "todo" && filterStatus != "in-progress" {
+		fmt.Println("Filter invalid")
+		return
+	}
+
+	tasks := database.GetTasksFromFile()
 
 	if tasks == nil {
 		fmt.Println("No tasks found or error reading file")

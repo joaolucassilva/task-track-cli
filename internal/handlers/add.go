@@ -3,10 +3,11 @@ package handlers
 import (
 	"fmt"
 	"github.com/joaolucassilva/task-track-cli/internal/entities"
+	"github.com/joaolucassilva/task-track-cli/internal/infra/database"
 )
 
 func Add(name string) {
-	tasks := GetTasksFromFile()
+	tasks := database.GetTasksFromFile()
 
 	if CheckTaskNameExists(name, tasks) {
 		fmt.Printf("There is already a task with this name.")
@@ -20,7 +21,7 @@ func Add(name string) {
 
 	tasks = append(tasks, *newTask)
 
-	WriteTaskToFile(tasks)
+	database.WriteTaskToFile(tasks)
 
 	fmt.Printf("Task added successfully (ID: %d).\n", newTask.ID)
 }

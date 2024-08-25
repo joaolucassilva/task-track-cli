@@ -2,11 +2,12 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/joaolucassilva/task-track-cli/internal/infra/database"
 	"strconv"
 )
 
 func DeleteById(ID string) {
-	tasks := GetTasksFromFile()
+	tasks := database.GetTasksFromFile()
 	var idInt, _ = strconv.ParseInt(ID, 10, 64)
 
 	indexSearch := -1
@@ -24,5 +25,5 @@ func DeleteById(ID string) {
 
 	tasks = append(tasks[:indexSearch], tasks[indexSearch+1:]...)
 
-	WriteTaskToFile(tasks)
+	database.WriteTaskToFile(tasks)
 }

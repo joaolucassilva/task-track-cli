@@ -3,12 +3,13 @@ package handlers
 import (
 	"fmt"
 	"github.com/joaolucassilva/task-track-cli/internal/entities"
+	"github.com/joaolucassilva/task-track-cli/internal/infra/database"
 	"strconv"
 )
 
 func UpdateDescription(ID string, description string) {
 	updated := false
-	tasks := GetTasksFromFile()
+	tasks := database.GetTasksFromFile()
 
 	if CheckTaskNameExists(description, tasks) {
 		fmt.Printf("There is already a task with this name.")
@@ -31,7 +32,7 @@ func UpdateDescription(ID string, description string) {
 	}
 
 	if updated {
-		WriteTaskToFile(tasks)
+		database.WriteTaskToFile(tasks)
 		return
 	}
 
@@ -39,7 +40,7 @@ func UpdateDescription(ID string, description string) {
 }
 
 func UpdateStatus(ID string, status entities.Status) {
-	tasks := GetTasksFromFile()
+	tasks := database.GetTasksFromFile()
 
 	var idInt, _ = strconv.ParseInt(ID, 10, 64)
 	updated := false
@@ -57,7 +58,7 @@ func UpdateStatus(ID string, status entities.Status) {
 	}
 
 	if updated {
-		WriteTaskToFile(tasks)
+		database.WriteTaskToFile(tasks)
 		return
 	}
 
