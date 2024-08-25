@@ -26,4 +26,5 @@ func DeleteById(ID string) {
 	tasks = append(tasks[:indexSearch], tasks[indexSearch+1:]...)
 
 	database.WriteTaskToFile(tasks)
+	fmt.Printf("task with ID %s deleted\n", ID)
 }
